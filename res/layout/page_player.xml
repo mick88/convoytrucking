@@ -1,0 +1,64 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="false" >
+
+    <LinearLayout
+        android:id="@+id/page_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:gravity="start"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@+id/fragment_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="player_info" />
+
+        <LinearLayout
+            android:id="@+id/layoutPlayerStats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvStats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/statistics"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <FrameLayout
+                android:id="@+id/fragment_stats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="player_stats"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutPlayerHouse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/tvHouse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/house_owned"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <FrameLayout
+                android:id="@+id/fragment_house"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="player_house"
+                android:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

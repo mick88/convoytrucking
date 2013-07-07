@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvPlayerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Name" />
+    <TextView
+        android:id="@+id/tvPlayerStaff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Staff"
+        android:layout_below="@+id/tvPlayerName"
+        android:textColor="@color/red"
+        android:visibility="visible" />
+    
+     <TextView
+        android:id="@+id/tvPlayerVip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="VIP"
+        android:layout_below="@+id/tvPlayerStaff"
+        android:textColor="@color/gold"
+        android:visibility="visible" />
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/tvPlayerVip"
+         android:orientation="vertical">
+     	<TextView android:id="@+id/tvPlayerScore"
+     		android:layout_width="wrap_content"
+     		android:layout_height="wrap_content"
+     		android:layout_alignParentLeft="true"
+     		android:layout_below="@+id/tvPlayerVip"
+     		android:text="Score: 1999"
+     		android:textAppearance="?android:attr/textAppearanceMedium" />
+
+     	<TextView
+     	    android:id="@+id/tvConvoyScore"
+     	    android:layout_width="wrap_content"
+     	    android:layout_height="wrap_content"
+     	    android:text="@string/convoy_score"
+     	    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+     	<TextView
+     	    android:id="@+id/tvTruckMissions"
+     	    android:layout_width="wrap_content"
+     	    android:layout_height="wrap_content"
+     	    android:text="@string/truck_missions"
+     	    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+     	<TextView android:id="@+id/tvLastSeen"
+     		android:layout_width="wrap_content"
+     		android:layout_height="wrap_content"
+     		android:layout_alignParentLeft="true"
+     		android:layout_below="@+id/tvPlayerScore"
+     		android:text="Last seen: 3 days ago"
+     		android:textAppearance="?android:attr/textAppearanceMedium" />
+     	<TextView android:id="@+id/tvRegistered"
+     		android:layout_width="wrap_content"
+     		android:layout_height="wrap_content"
+     		android:layout_alignParentLeft="true"
+     		android:layout_below="@+id/tvLastSeen"
+     		android:text="Registered on:"
+     		android:textAppearance="?android:attr/textAppearanceMedium" />
+     </LinearLayout>
+</RelativeLayout>

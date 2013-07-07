@@ -1,0 +1,42 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
+
+    <LinearLayout
+        android:id="@+id/page_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:gravity="start"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@+id/fragment_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="house_info" />
+
+        <LinearLayout
+            android:id="@+id/layoutHouseOwner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvCurrentOwner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/current_owner"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <FrameLayout
+                android:id="@+id/fragment_owner_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="house_owner_info" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

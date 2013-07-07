@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_content"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".fragments.HouseFragment" >
+
+    <ImageView
+        android:id="@+id/imVehicleImage"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="Vehicle thumbnail"
+        android:scaleType="centerCrop"
+        android:layout_marginRight="@dimen/card_padding"
+        android:src="@drawable/generic_house" />
+
+    <TextView
+        android:id="@+id/tvVehicleCaption"
+        style="@style/DataKey"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imVehicleImage"
+        android:ellipsize="marquee"
+        android:maxLines="1"
+        android:text="Vehicle"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        style="@style/DataKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvVehicleCaption"
+        android:layout_toRightOf="@+id/imVehicleImage"
+        android:text="$100,000"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/tvTopSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPrice"
+        android:layout_toRightOf="@+id/imVehicleImage"
+        android:text="Top Speed: 278 kph"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>

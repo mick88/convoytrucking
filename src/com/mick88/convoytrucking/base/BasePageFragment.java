@@ -1,0 +1,231 @@
+package com.mick88.convoytrucking.base;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONException;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.MenuItem;
+import com.mick88.convoytrucking.ConvoyTruckingApp;
+import com.mick88.convoytrucking.R;
+import com.mick88.convoytrucking.activities.MainActivity;
+import com.mick88.convoytrucking.api.ApiConnection;
+import com.mick88.convoytrucking.api.ApiRequest;
+import com.mick88.convoytrucking.api.ApiRequest.ApiRequestListener;
+import com.mick88.convoytrucking.api.entities.ApiEntity;
+import com.mick88.convoytrucking.api.entities.ApiError;
+import com.mick88.convoytrucking.cards.CardFragment;
+import com.mick88.convoytrucking.interfaces.OnDownloadListener;
+import com.mick88.convoytrucking.interfaces.RefreshListener;
+import com.mick88.util.FontApplicator;
+
+/**
+ * Base page fragment. Displays information as cards.
+ * @author Michal
+ * 
+ */
+public abstract class BasePageFragment<T extends ApiEntity> extends SherlockFragment
+{
+	public static final String EXTRA_ENTITY = "entity";
+	protected T entity;
+	protected MainActivity activity=null;
+	protected ConvoyTruckingApp application;
+	protected List<CardFragment> cards = new ArrayList<CardFragment>();
+	protected ViewGroup rootView=null;
+	ApiConnection connection;
+	ApiRequest pendingRequest=null;
+	FontApplicator fontApplicator=null;
+	
+	protected abstract int selectLayout();
+	protected abstract T createEntity(String json) throws JSONException;
+	
+	/**
+	 * Allows fragment to introduce required settings to the actionbar. 
+	 * Super implementation sets title to app name and navigation mode to default
+	 * @param actionBar
+	 */
+	public void setupActionBar(ActionBar actionBar)
+	{
+//		actionBar.setIcon(R.drawable.convoy_trucking_logo);
+		actionBar.setLogo(R.drawable.convoy_trucking_logo);
+		actionBar.setDisplayUseLogoEnabled(true);
+		actionBar.setTitle(R.string.app_name);
+		actionBar.setSubtitle(null);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+	}
+	
+	protected ActionBar getActionBar()
+	{
+		if (activity == null) return null;
+		return activity.getSupportActionBar();
+	}
+	
+	public boolean refresh(final RefreshListener listener)
+	{
+		if (pendingRequest != null) return false;
+		
+		downloadData(new OnDownloadListener()
+		{
+			
+			@Override
+			public void onDownloadFinished()
+			{
+				if (listener != null) listener.onRefreshFinished();
+				
+			}
+		});
+		return true;
+	}
+	
+	protected void downloadData(final OnDownloadListener listener)
+	{
+		Log.d(toString(), "Downloading data");
+		pendingRequest = createRequest().SendAsync(new ApiRequestListener()
+		{			
+			@Override
+			public void onRequestComplete(ApiRequest apiRequest)
+			{
+				try
+				{
+					setEntity(createEntity(apiRequest.getResult()));
+				}
+				catch (JSONException e) 
+				{
+					ApiError error = apiRequest.getError();
+					if (error != null)
+					{
+						Log.e(getClass().getName(), error.getMessage());
+					}
+					else Log.e(getClass().getName(), "Unknown error while parsing "+apiRequest.getResult());
+				}
+				pendingRequest = null;
+				if (listener != null) listener.onDownloadFinished();
+			}
+		});
+	}
+	
+	/**
+	 * checks if view is created and entity exists, then calls fillContents()
+	 * returns true if both conditions are true
+	 */
+	protected boolean fillViewContents()
+	{
+		if (rootView != null && entity != null)
+		{
+			return true;
+		}
+		else return false;
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState)
+	{
+		super.onSaveInstanceState(outState);
+		outState.putSerializable(EXTRA_ENTITY, entity);
+	}
+	
+	@Override
+	public void onAttach(Activity activity)
+	{
+		super.onAttach(activity);
+		Log.d(toString(), "Fragment attached");
+		this.activity = (MainActivity) activity;
+		this.fontApplicator = new FontApplicator(activity.getAssets(), ConvoyTruckingApp.FONT_ROBOTO_LIGHT);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public void onCreate(android.os.Bundle arg0)
+	{
+		super.onCreate(arg0);
+		
+		Log.d(toString(), "Fragment created");
+		
+		this.activity = (MainActivity) getActivity();
+		this.application = (ConvoyTruckingApp) activity.getApplication();
+		this.connection = application.getApiConnection();
+		
+		if (arg0 != null)
+		{
+			Object state = arg0.getSerializable(EXTRA_ENTITY);
+			if (state instanceof ApiEntity)
+			{
+				setEntity((T) state);
+			}
+		}
+		
+		if (entity == null)
+		{		
+			downloadData(null);
+		}
+	}
+	
+	/**
+	 * Creates empty request
+	 */
+	protected ApiRequest createRequest()
+	{
+		return connection.createRequest();
+	}
+	
+	/**
+	 * Sets entity and updates views
+	 * @param entity
+	 * @return 
+	 */
+	public BasePageFragment<T> setEntity(T entity)
+	{
+		this.entity = entity;
+		fillViewContents();
+		return this;
+	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState)
+	{
+		Log.d(toString(), "Fragment view created");
+		rootView = (ViewGroup) inflater.inflate(selectLayout(), null);
+		fontApplicator.applyFont(rootView);
+		fillViewContents();
+		
+		setupActionBar(activity.getSupportActionBar());
+		return rootView;
+	}
+	
+	@Override
+	public void onDestroy()
+	{
+		Log.d(toString(), "Fragment destroyed");
+		super.onDestroy();
+	}
+	
+	@Override
+	public void onDestroyView()
+	{
+		Log.d(toString(), "Fragment view destroyed");
+		rootView = null;
+		super.onDestroyView();
+	}
+	
+	public boolean onMenuItemSelected(MenuItem menuItem)
+	{
+		return false;
+	}
+	
+	protected View findViewById(int id)
+	{
+		if (rootView == null) return null;
+		else return rootView.findViewById(id);
+	}
+	
+}

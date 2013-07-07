@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_content"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvPlayerPos"
+        style="@style/DataKey"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:maxLines="1"
+        android:text="1"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tvPlayername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tvPlayerPos"
+        android:layout_alignParentTop="true"
+        android:text="Nickname"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvPlayerScore"
+        style="@style/DataKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvPlayername"
+        android:layout_below="@+id/tvPlayername"
+        android:text="Score: 1024"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>

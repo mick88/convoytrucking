@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Convoy Trucking</string>
+    <string name="open_drawer">Open Drawer</string>
+    <string name="close_drawer">Close Drawer</string>
+    <string name="refresh">Refresh</string>
+    
+    <string name="admin">administrator</string>
+    <string name="moderator">Moderator</string>
+    <string name="jrmod">Jr Moderator</string>
+    
+    <!-- Activity titles -->
+     <string name="title_scoretable">Scoretable</string>
+     <string name="title_houses">Houses</string>
+     <string name="title_vehicles">Vehicles</string>
+     <string name="title_server_info">Server info</string>
+     <string name="house_addr_placeholder">123 Imaginary Road</string>
+     <string name="owned_by">Owned by:</string>
+     <string name="location">Location</string>
+     <string name="price">Price:</string>
+     <string name="slots_lbl">Slots:</string>
+     <string name="house_unavailable_warn">This house is not yet available for sale.</string>
+     <string name="empty"></string>
+     <string name="current_owner">Current Owner:</string>
+     <string name="filter">Filter</string>
+     <string name="sort_by">Sort By</string>
+     <string name="one_slots">1 slots:</string>
+     <string name="statistics">Statistics:</string>
+     <string name="house_owned">House:</string>
+     <string name="truck_missions">Truck loads:</string>
+     <string name="convoy_score">Convoy Score:</string>
+     <string name="last_seen">Last seen:</string>
+</resources>
