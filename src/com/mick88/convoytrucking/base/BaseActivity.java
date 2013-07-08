@@ -190,7 +190,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity
 	{
 		switch (item.getItemId())
 		{
-		case R.id.action_refresh:
+/*		case R.id.action_refresh:
 
 			if (refresh(new RefreshListener()
 			{
@@ -210,7 +210,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity
 				progressBar.setLayoutParams(params);
 				item.setActionView(progressBar);
 			}
-			break;
+			break;*/
 		}
 		return super.onMenuItemSelected(featureId, item);
 	}

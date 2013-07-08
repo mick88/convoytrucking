@@ -52,6 +52,12 @@ public class VehicleListPage extends BaseListPageFragment<VehicleEntity, Vehicle
 	}
 	
 	@Override
+	public String getWebsiteUrl()
+	{
+		return "http://convoytrucking.net/vehicles.php";
+	}
+	
+	@Override
 	protected ApiRequest createRequest()
 	{
 		return super.createRequest()

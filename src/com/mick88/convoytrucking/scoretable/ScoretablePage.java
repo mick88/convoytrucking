@@ -1,6 +1,7 @@
 package com.mick88.convoytrucking.scoretable;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.json.JSONException;
 
@@ -57,6 +58,12 @@ public class ScoretablePage extends BaseListPageFragment<ScoreEntity, ScoreColle
 		return "";
 	}
 	
+	@Override
+	public String getWebsiteUrl()
+	{
+		String sort = (sortBy == SortBy.truck_loads?"loads" : sortBy.toString());
+		return String.format(Locale.getDefault(), "http://convoytrucking.net/index.php?show=scoretable&sort=%s#table", sort);
+	}
 	
 	
 	@Override
@@ -89,9 +96,9 @@ public class ScoretablePage extends BaseListPageFragment<ScoreEntity, ScoreColle
 	}
 	
 	@Override
-	public boolean onMenuItemSelected(MenuItem menuItem)
+	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		if (menuItem.getItemId() == R.id.action_sort)
+		if (item.getItemId() == R.id.action_sort)
 		{
 			new PickerDialog<String>().setTitle(R.string.sort_by)
 				.setItems(new String[] {sortByToString(SortBy.convoy_score), sortByToString(SortBy.odo), sortByToString(SortBy.score), sortByToString(SortBy.truck_loads)} )
@@ -125,8 +132,7 @@ public class ScoretablePage extends BaseListPageFragment<ScoreEntity, ScoreColle
 					}
 				}).show(getFragmentManager(), null);
 		}
-		
-		return super.onMenuItemSelected(menuItem);
+		return super.onOptionsItemSelected(item);
 	}
 	
 	/**

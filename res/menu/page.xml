@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_page_refresh"
+        android:icon="@drawable/ab_refresh"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/refresh"/>
+    <item
+        android:orderInCategory="101"
+        android:id="@+id/action_web"
+        android:icon="@drawable/web"
+        android:showAsAction="always"
+        android:title="Show in browser"
+        android:titleCondensed="Web"/>
+
+</menu>

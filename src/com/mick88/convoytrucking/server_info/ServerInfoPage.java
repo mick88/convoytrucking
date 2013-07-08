@@ -51,6 +51,12 @@ public class ServerInfoPage extends BasePageFragment<ServerInfoEntity>
 	}
 	
 	@Override
+	public String getWebsiteUrl()
+	{
+		return "http://convoytrucking.net/index.php?show=info";
+	}
+	
+	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState)
 	{
 		super.onViewCreated(view, savedInstanceState);

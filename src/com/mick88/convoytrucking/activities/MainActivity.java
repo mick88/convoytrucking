@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
-import com.actionbarsherlock.view.MenuItem;
 import com.mick88.convoytrucking.R;
 import com.mick88.convoytrucking.base.BaseActivity;
 import com.mick88.convoytrucking.base.BasePageFragment;
@@ -78,17 +77,6 @@ public final class MainActivity extends BaseActivity
 		if (addBackStack) transaction.addToBackStack(null);
 		else getSupportFragmentManager().popBackStack();
 		transaction.commit();
-	}
-	
-	@Override
-	public boolean onMenuItemSelected(int featureId, MenuItem item)
-	{
-		BasePageFragment<?> page =	getCurrentPage();
-		if (page != null)
-		{
-			if (page.onMenuItemSelected(item)) return true;
-		}
-		return super.onMenuItemSelected(featureId, item);
 	}
 	
 	@Override

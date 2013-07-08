@@ -78,6 +78,12 @@ public class HouseListPage extends BaseListPageFragment<HouseEntity, HouseCollec
 		return new HouseCollection(json);
 	}
 	
+	@Override
+	public String getWebsiteUrl()
+	{
+		return "http://convoytrucking.net/houses.php";
+	}
+	
 	public void setFilter(Filter filter)
 	{
 		if (this.filter != filter)
@@ -97,11 +103,10 @@ public class HouseListPage extends BaseListPageFragment<HouseEntity, HouseCollec
 	}
 	
 	@Override
-	public boolean onMenuItemSelected(MenuItem menuItem)
+	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		if (menuItem.getItemId() == R.id.action_filter)
+		if (item.getItemId() == R.id.action_filter)
 		{
-//			Dialog dialog = new AlertDialog
 			new PickerDialog<String>().setTitle(R.string.filter).setItems(new String[]{"All houses", "Available now", "All for Sale"})
 				.setItemPickedListener(new OnItemPickedListener<String>()
 			{
@@ -109,8 +114,6 @@ public class HouseListPage extends BaseListPageFragment<HouseEntity, HouseCollec
 				@Override
 				public void onItemPicked(String item, int position)
 				{
-//					setFilter(item);					
-					//Filter.all, Filter.available, Filter.for_sale
 					switch (position)
 					{
 						case 0:
@@ -130,7 +133,7 @@ public class HouseListPage extends BaseListPageFragment<HouseEntity, HouseCollec
 			.show(getFragmentManager(), null);
 			return true;
 		}
-		return super.onMenuItemSelected(menuItem);
+		return super.onOptionsItemSelected(item);
 	}
 	
 	@Override
