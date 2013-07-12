@@ -1,5 +1,7 @@
 package com.mick88.convoytrucking.houses.detail;
 
+import java.util.Locale;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -143,6 +145,12 @@ public class HouseDetailsPage extends BasePageFragment<HouseEntity> implements O
 				activity.openPage(new PlayerPage().setPlayerid(entity.getOwnerId()), true);
 				break;
 		}*/
+	}
+	
+	@Override
+	public String getWebsiteUrl()
+	{
+		return String.format(Locale.getDefault(), "http://convoytrucking.net/houses.php?houseid=%d", this.entity.getId());
 	}
 	
 	

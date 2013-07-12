@@ -193,43 +193,8 @@ public class ScoretablePage extends BaseListPageFragment<ScoreEntity, ScoreColle
 	{
 		super.setupActionBar(actionBar);
 
-		activity.setTitle(R.string.title_scoretable);
+		actionBar.setTitle(R.string.title_scoretable);
 		updateSortSubtitle();
 	}
-	
-	/*@Override
-	public boolean onNavigationItemSelected(int itemPosition, long itemId)
-	{		
-		SortBy newOrder;
-		switch (itemPosition)
-		{
-			case 0:
-				newOrder = SortBy.convoy_score;
-				break;
-				
-			case 1:
-				newOrder =SortBy.odo; 
-				break;
-			
-			case 2:
-				newOrder = SortBy.score;
-				break;
-				
-			case 3:
-				newOrder = SortBy.truck_loads;
-				break;
-				
-			default:
-				return false;
-		}
-		
-		if (sortBy != newOrder)
-		{
-			setSortBy(newOrder);
-			showProgressBar();
-			downloadData(null);
-		}
-		return false;
-	}*/
 
 }
