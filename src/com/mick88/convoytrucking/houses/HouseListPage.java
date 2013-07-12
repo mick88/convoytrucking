@@ -21,6 +21,11 @@ import com.mick88.convoytrucking.houses.detail.HouseDetailsPage;
 
 public class HouseListPage extends BaseListPageFragment<HouseEntity, HouseCollection>
 {
+	// Human readable representation
+	private static final String
+		HUMAN_ALL = "All houses",
+		HUMAN_AVAILABLE = "Available for sale",
+		HUMAN_FOR_SALE = "All for sale";
 	public enum Filter
 	{
 		for_sale,
@@ -31,6 +36,19 @@ public class HouseListPage extends BaseListPageFragment<HouseEntity, HouseCollec
 	}
 	Filter filter = Filter.for_sale;
 	final String BUNDLE_FILTER = "filter";
+	
+	private String filterToString(Filter filter)
+	{
+		switch (filter)
+		{
+			case all: return HUMAN_ALL;
+			case available:return HUMAN_AVAILABLE;
+//			case details:
+			case for_sale: return HUMAN_FOR_SALE;
+//			case pending:
+			default: return "???";			
+		}
+	}
 	
 	@Override
 	public void onCreate(Bundle savedState)
@@ -107,7 +125,7 @@ public class HouseListPage extends BaseListPageFragment<HouseEntity, HouseCollec
 	{
 		if (item.getItemId() == R.id.action_filter)
 		{
-			new PickerDialog<String>().setTitle(R.string.filter).setItems(new String[]{"All houses", "Available now", "All for Sale"})
+			new PickerDialog<String>().setTitle(R.string.filter).setItems(new String[]{HUMAN_ALL, HUMAN_AVAILABLE, HUMAN_FOR_SALE})
 				.setItemPickedListener(new OnItemPickedListener<String>()
 			{
 
@@ -141,7 +159,7 @@ public class HouseListPage extends BaseListPageFragment<HouseEntity, HouseCollec
 	{
 		super.setupActionBar(actionBar);
 		actionBar.setTitle(R.string.title_houses);
-		actionBar.setSubtitle(filter.toString());
+		actionBar.setSubtitle(filterToString(this.filter));
 		
 	}
 	
