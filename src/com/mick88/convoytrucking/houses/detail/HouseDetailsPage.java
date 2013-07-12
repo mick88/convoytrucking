@@ -150,7 +150,8 @@ public class HouseDetailsPage extends BasePageFragment<HouseEntity> implements O
 	@Override
 	public String getWebsiteUrl()
 	{
-		return String.format(Locale.getDefault(), "http://convoytrucking.net/houses.php?houseid=%d", this.entity.getId());
+		if (entity == null) return null;
+		return String.format(Locale.getDefault(), "http://convoytrucking.net/houses.php?houseid=%d", entity.getId());
 	}
 	
 	

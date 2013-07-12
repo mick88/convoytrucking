@@ -1,5 +1,7 @@
 package com.mick88.convoytrucking.player;
 
+import java.util.Locale;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -8,6 +10,9 @@ import android.util.Log;
 import android.view.View;
 
 import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.mick88.convoytrucking.R;
 import com.mick88.convoytrucking.api.ApiConnection;
 import com.mick88.convoytrucking.api.ApiRequest;
@@ -173,8 +178,14 @@ public class PlayerPage extends BasePageFragment<PlayerEntity>
 		{
 			actionBar.setTitle(entity.getName());
 			actionBar.setSubtitle(entity.getRank());		
-		}
-		
+		}	
+	}
+	
+	
+	@Override
+	public String getWebsiteUrl()
+	{
+		return String.format(Locale.getDefault(), "http://convoytrucking.net/panel.php?playerid=%d", playerid);
 	}
 	
 }

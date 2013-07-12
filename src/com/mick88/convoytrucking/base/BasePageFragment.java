@@ -209,8 +209,10 @@ public abstract class BasePageFragment<T extends ApiEntity> extends
 		switch (item.getItemId())
 		{
 			case R.id.action_web:
+				String url = getWebsiteUrl();
+				if (url == null) return true;
 				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setData(Uri.parse(getWebsiteUrl()));
+				intent.setData(Uri.parse(url));
 				startActivity(intent);
 				return true;
 	
