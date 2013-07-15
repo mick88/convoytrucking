@@ -82,28 +82,7 @@ public final class MainActivity extends BaseActivity
 	@Override
 	protected void onDrawerItemSelected(AppMenuItem item)
 	{
-		switch (item.getPage())
-		{
-			case Houses:
-				openPage(new HouseListPage());
-				return;
-				
-			case Scoretable:
-				openPage(new ScoretablePage());
-				return;
-				
-			case ServerInfo:
-				openPage(new ServerInfoPage());
-				return;
-				
-			case Vehicles:
-				openPage(new VehicleListPage());
-				break;
-				
-			default:
-				break;
-			
-		}
+		openPage(item.getPage());
 	}
 
 }

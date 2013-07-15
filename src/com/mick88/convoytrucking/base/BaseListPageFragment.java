@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.mick88.convoytrucking.BaseEntityAdapter;
 import com.mick88.convoytrucking.R;
 import com.mick88.convoytrucking.api.ApiRequest;
 import com.mick88.convoytrucking.api.ApiRequest.ApiRequestListener;

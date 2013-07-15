@@ -9,10 +9,10 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.mick88.convoytrucking.BaseEntityAdapter;
 import com.mick88.convoytrucking.R;
 import com.mick88.convoytrucking.api.ApiConnection;
 import com.mick88.convoytrucking.api.ApiRequest;
+import com.mick88.convoytrucking.base.BaseEntityAdapter;
 import com.mick88.convoytrucking.base.BaseListPageFragment;
 
 public class VehicleListPage extends BaseListPageFragment<VehicleEntity, VehicleEntityCollection>

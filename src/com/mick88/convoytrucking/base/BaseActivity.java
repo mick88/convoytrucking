@@ -122,8 +122,6 @@ public abstract class BaseActivity extends SherlockFragmentActivity
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		/*if (actionBarDrawerToggle.onOptionsItemSelected(item))
-			return true;*/
 		if (item.getItemId() == android.R.id.home)
 		{
 			if (drawerLayout.isDrawerOpen(GravityCompat.START))
@@ -134,8 +132,6 @@ public abstract class BaseActivity extends SherlockFragmentActivity
 			{
 				drawerLayout.openDrawer(GravityCompat.START);
 			}
-//			actionBarDrawerToggle.
-			
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

@@ -1,34 +1,21 @@
 package com.mick88.convoytrucking.navigation;
 
+import com.mick88.convoytrucking.base.BasePageFragment;
+
 
 /**
  * Represents menu item in navigation drawer
  * @author Michal
  *
  */
-public class AppMenuItem
-{
-	public enum Page
-	{
-		ServerInfo,
-		Scoretable,
-		Houses,
-		Vehicles,
-	}
-	
+public abstract class AppMenuItem
+{	
 	private final int iconId, labelId;
-	private final Page page;
 	
-	public AppMenuItem(int labelId, Page page, int icon)
+	public AppMenuItem(int labelId, int icon)
 	{
 		this.labelId = labelId;
-		this.page = page;
 		this.iconId = icon;
-	}
-	
-	public Page getPage()
-	{
-		return page;
 	}
 	
 	/**
@@ -43,4 +30,6 @@ public class AppMenuItem
 	{
 		return iconId;
 	}
+	
+	public abstract BasePageFragment<?> getPage();
 }

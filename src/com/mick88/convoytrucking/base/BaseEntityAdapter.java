@@ -1,7 +1,11 @@
-package com.mick88.convoytrucking;
+package com.mick88.convoytrucking.base;
 
 import java.util.List;
 
+import com.mick88.convoytrucking.ConvoyTruckingApp;
+import com.mick88.convoytrucking.R;
+import com.mick88.convoytrucking.R.id;
+import com.mick88.convoytrucking.R.layout;
 import com.mick88.convoytrucking.api.entities.ApiEntity;
 import com.mick88.util.FontApplicator;
 

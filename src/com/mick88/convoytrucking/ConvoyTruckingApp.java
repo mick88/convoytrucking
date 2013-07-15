@@ -3,8 +3,12 @@ package com.mick88.convoytrucking;
 import android.app.Application;
 
 import com.mick88.convoytrucking.api.ApiConnection;
+import com.mick88.convoytrucking.base.BasePageFragment;
+import com.mick88.convoytrucking.houses.HouseListPage;
 import com.mick88.convoytrucking.navigation.AppMenuItem;
-import com.mick88.convoytrucking.navigation.AppMenuItem.Page;
+import com.mick88.convoytrucking.scoretable.ScoretablePage;
+import com.mick88.convoytrucking.server_info.ServerInfoPage;
+import com.mick88.convoytrucking.vehicles.VehicleListPage;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -58,10 +62,45 @@ public class ConvoyTruckingApp extends Application
 		apiConnection = new ApiConnection(apiKey);
 		menuItems = new AppMenuItem[]
 		{
-			new AppMenuItem(R.string.title_server_info, Page.ServerInfo, R.drawable.ic_nav_server_info),
-			new AppMenuItem(R.string.title_scoretable, Page.Scoretable, R.drawable.ic_nav_scoretable),
-			new AppMenuItem(R.string.title_houses, Page.Houses, R.drawable.ic_nav_house),
-			new AppMenuItem(R.string.title_vehicles, Page.Vehicles, R.drawable.ic_nav_vehicles),
+			new AppMenuItem(R.string.title_server_info, R.drawable.ic_nav_server_info){
+
+				@Override
+				public BasePageFragment<?> getPage()
+				{
+					return new ServerInfoPage();
+				}
+				
+			},
+			new AppMenuItem(R.string.title_scoretable, R.drawable.ic_nav_scoretable)
+			{
+
+				@Override
+				public BasePageFragment<?> getPage()
+				{
+					return new ScoretablePage();
+				}
+				
+			},
+			new AppMenuItem(R.string.title_houses, R.drawable.ic_nav_house)
+			{
+
+				@Override
+				public BasePageFragment<?> getPage()
+				{
+					return new HouseListPage();
+				}
+				
+			},
+			new AppMenuItem(R.string.title_vehicles, R.drawable.ic_nav_vehicles)
+			{
+
+				@Override
+				public BasePageFragment<?> getPage()
+				{
+					return new VehicleListPage();
+				}
+				
+			},
 		};		
 		
 		

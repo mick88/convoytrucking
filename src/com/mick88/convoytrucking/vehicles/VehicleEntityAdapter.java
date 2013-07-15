@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mick88.convoytrucking.BaseEntityAdapter;
 import com.mick88.convoytrucking.R;
+import com.mick88.convoytrucking.base.BaseEntityAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class VehicleEntityAdapter extends BaseEntityAdapter<VehicleEntity>
