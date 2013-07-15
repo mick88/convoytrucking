@@ -128,23 +128,6 @@ public abstract class CardFragment extends Fragment
 		}
 	}
 	
-	@Override
-	public void onAttach(Activity activity)
-	{
-		if (activity instanceof BaseActivity)
-		{
-			((BaseActivity) activity).onCardAttached(this);
-		}
-		super.onAttach(activity);
-	}
-	
-	@Override
-	public void onDetach()
-	{
-		this.activity.onCardRemoved(this);
-		super.onDetach();
-	}
-	
 	public CardFragment setOnClickListener(OnClickListener onClickListener)
 	{
 		this.onClickListener = onClickListener;

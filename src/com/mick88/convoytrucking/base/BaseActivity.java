@@ -8,17 +8,11 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewCompatJB;
-import android.support.v4.view.ViewConfigurationCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
@@ -45,7 +39,6 @@ public abstract class BaseActivity extends SherlockFragmentActivity
 	ActionBarDrawerToggle actionBarDrawerToggle;
 	DrawerLayout drawerLayout=null;
 	protected ConvoyTruckingApp application;
-	protected List<CardFragment> cards = new ArrayList<CardFragment>();;
 
 	protected abstract int selectLayout();
 
@@ -183,46 +176,6 @@ public abstract class BaseActivity extends SherlockFragmentActivity
 				return true;
 		}
 		return false;
-	}
-
-	@Override
-	public boolean onMenuItemSelected(int featureId, final MenuItem item)
-	{
-		switch (item.getItemId())
-		{
-/*		case R.id.action_refresh:
-
-			if (refresh(new RefreshListener()
-			{
-
-				@Override
-				public void onRefreshFinished()
-				{
-					item.setActionView(null);
-
-				}
-			}))
-			{
-				LayoutParams params = new LayoutParams(
-						LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-				ProgressBar progressBar = new ProgressBar(this, null,
-						android.R.attr.progressBarStyle);
-				progressBar.setLayoutParams(params);
-				item.setActionView(progressBar);
-			}
-			break;*/
-		}
-		return super.onMenuItemSelected(featureId, item);
-	}
-
-	public void onCardAttached(CardFragment card)
-	{
-		cards.add(card);
-	}
-
-	public void onCardRemoved(CardFragment card)
-	{
-		cards.remove(card);
 	}
 
 }
