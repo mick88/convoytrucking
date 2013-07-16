@@ -1,28 +1,20 @@
 package com.mick88.convoytrucking.forum;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
+import java.util.List;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.mick88.convoytrucking.R;
 import com.mick88.convoytrucking.base.BaseFragment;
+import com.mick88.convoytrucking.forum.rss.RssItem;
+import com.mick88.convoytrucking.forum.rss.RssReader;
 import com.mick88.convoytrucking.interfaces.OnDownloadListener;
 import com.mick88.convoytrucking.interfaces.RefreshListener;
-import com.mick88.util.HttpGetter;
 
-public class ForumRssPage extends BaseFragment implements OnDownloadListener
+public class ForumRssPage extends BaseFragment
 {
 	private static final String RSS_FEED_URL = "http://www.forum.convoytrucking.net/index.php?action=.xml;type=rss";
 	
@@ -30,7 +22,7 @@ public class ForumRssPage extends BaseFragment implements OnDownloadListener
 	public void onCreate(Bundle arg0)
 	{
 		super.onCreate(arg0);
-		downloadData(this);
+		downloadData(null);
 	}
 
 	@Override
@@ -44,30 +36,21 @@ public class ForumRssPage extends BaseFragment implements OnDownloadListener
 	{
 		// TODO Auto-generated method stub
 		return false;
-	}
-	
-	private void downloadAsync() throws IOException, ParserConfigurationException, SAXException
-	{
-		InputStream inputStream = new URL(RSS_FEED_URL).openConnection().getInputStream();
-		SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
-		SaxHandler handler = new SaxHandler();
-		saxParser.parse(inputStream, handler);				
-	}
+	}	
 
 	@Override
-	protected void downloadData(final OnDownloadListener listener)
+	protected void downloadData(OnDownloadListener listener)
 	{
-		new AsyncTask<Void, Void, String>()
+		new AsyncTask<Void, Void, List<RssItem>>()
 		{
 
 			@Override
-			protected String doInBackground(Void... params)
+			protected List<RssItem> doInBackground(Void... params)
 			{
 				
 				try
 				{
-					downloadAsync();
-					return HttpGetter.getString(RSS_FEED_URL);
+					return new RssReader(RSS_FEED_URL).read();
 				} catch (Exception e)
 				{
 					// TODO Auto-generated catch block
@@ -76,17 +59,11 @@ public class ForumRssPage extends BaseFragment implements OnDownloadListener
 				}
 			}
 			
-			protected void onPostExecute(String result) {
-				listener.onDownloadFinished();
+			protected void onPostExecute(List<RssItem> result) {
+				ListView listView = (ListView) findViewById(R.id.listView);
+				listView.setAdapter(new ArrayAdapter<RssItem>(activity, android.R.layout.simple_list_item_1, android.R.id.text1, result));
 			};
 		}.execute();
-	}
-
-	@Override
-	public void onDownloadFinished()
-	{
-		// TODO Auto-generated method stub
-		
 	}
 
 }
