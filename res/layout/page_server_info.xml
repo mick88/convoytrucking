@@ -1,14 +1,8 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/listView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="false" >
+    android:divider="#0000" 
+    />
 
-    <!-- <include layout="@layout/card_server_info"/> -->
-
-    <FrameLayout
-        android:id="@+id/frame_server_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </FrameLayout>
-
-</ScrollView>

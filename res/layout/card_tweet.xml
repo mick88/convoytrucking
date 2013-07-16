@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/card_background"
+    android:orientation="vertical"
+    android:padding="@dimen/card_padding" >
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvAuthor"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvAuthor"
+        android:text="Content" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="3d"
+        android:textColor="@color/gold" />
+
+    <ImageView
+        android:id="@+id/imgIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/card_padding"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgIcon"
+        android:layout_toLeftOf="@+id/tvTime"
+        android:layout_toRightOf="@+id/imgIcon"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Author"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginBottom="4dp" />
+
+</RelativeLayout>

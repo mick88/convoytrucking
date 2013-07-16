@@ -17,6 +17,7 @@ public class ConvoyTruckingApp extends Application
 {
 
 	private final String apiKey = "25598957d53b91fc9dccdddd860b199a";
+	public static final String TWITTER_FEED_URL = "http://mobile.twitter.com/ConvoyTrucking";
 	
 	public static final String 
 		FONT_ROBOTO_LIGHT = "fonts/Roboto_Light.ttf",

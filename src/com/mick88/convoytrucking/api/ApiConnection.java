@@ -1,15 +1,9 @@
 package com.mick88.convoytrucking.api;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +11,7 @@ import org.json.JSONObject;
 import com.mick88.convoytrucking.api.entities.ApiEntity;
 import com.mick88.convoytrucking.api.entities.ApiEntityCollection;
 import com.mick88.convoytrucking.server_info.ServerInfoEntity;
+import com.mick88.util.HttpGetter;
 
 public class ApiConnection
 {
@@ -59,25 +54,7 @@ public class ApiConnection
 				.append('=')
 				.append(entry.getValue());
 		}
-		HttpGet get = new HttpGet(url.toString());
-		DefaultHttpClient client = new DefaultHttpClient();
-		HttpResponse response = client.execute(get);
-		InputStream stream = response.getEntity().getContent();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-		
-		StringBuilder builder = new StringBuilder();
-		
-		String line;
-		while ((line = reader.readLine()) != null)
-		{
-			builder.append(line);
-		}
-		
-		reader.close();
-		stream.close();
-		response.getEntity().consumeContent();
-				
-		return builder.toString();
+		return HttpGetter.getString(url.toString());
 	}
 	
 	public JSONObject getJson(Map<String,String> params) throws IOException, JSONException

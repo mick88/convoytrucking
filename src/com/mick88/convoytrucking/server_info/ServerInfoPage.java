@@ -1,26 +1,44 @@
 package com.mick88.convoytrucking.server_info;
 
+import java.util.ArrayList;
+
 import org.json.JSONException;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.actionbarsherlock.app.ActionBar;
+import com.mick88.convoytrucking.ConvoyTruckingApp;
 import com.mick88.convoytrucking.R;
 import com.mick88.convoytrucking.api.ApiConnection;
 import com.mick88.convoytrucking.api.ApiRequest;
 import com.mick88.convoytrucking.base.BasePageFragment;
 import com.mick88.convoytrucking.cards.DataCardFragment;
+import com.mick88.convoytrucking.twitter.Tweet;
+import com.mick88.convoytrucking.twitter.TweetAdapter;
+import com.mick88.convoytrucking.twitter.Twitter;
+import com.mick88.convoytrucking.twitter.Twitter.OnTweetsFetchedListener;
+import com.mick88.util.FontApplicator;
 
 public class ServerInfoPage extends BasePageFragment<ServerInfoEntity>
 {
+	private static final String EXTRA_TWEETS = "tweets";
 	DataCardFragment<ServerInfoEntity> serverInfoCard;
+	ListView listTwitter;
+	ArrayList<Tweet> tweets=null;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onCreate(Bundle arg0)
 	{
 		super.onCreate(arg0);
 		serverInfoCard = new ServerInfoCard();
+		if (arg0 != null)
+		{
+			tweets = (ArrayList<Tweet>) arg0.getSerializable(EXTRA_TWEETS);
+		}
 	}
 	
 	@Override
@@ -57,12 +75,47 @@ public class ServerInfoPage extends BasePageFragment<ServerInfoEntity>
 	}
 	
 	@Override
+	public void onSaveInstanceState(Bundle outState)
+	{
+		super.onSaveInstanceState(outState);
+		if (tweets != null)
+		{
+			try
+			{
+				outState.putSerializable(EXTRA_TWEETS, tweets);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState)
 	{
 		super.onViewCreated(view, savedInstanceState);
 		
+		this.listTwitter = (ListView) findViewById(R.id.listView);
+		View infoView = activity.getLayoutInflater().inflate(R.layout.server_info_header, listTwitter, false);
+		final FontApplicator fontApplicator = new FontApplicator(activity.getAssets(), ConvoyTruckingApp.FONT_ROBOTO_LIGHT).applyFont(infoView);
+		listTwitter.addHeaderView(infoView);
+		listTwitter.setAdapter(new ArrayAdapter<Tweet>(activity, android.R.layout.simple_list_item_1, new Tweet[]{}));
+		
+		if (tweets != null ) listTwitter.setAdapter(new TweetAdapter(activity, tweets, fontApplicator));
+		else new Twitter(ConvoyTruckingApp.TWITTER_FEED_URL).fetchFeedAsync(new OnTweetsFetchedListener()
+		{
+			
+			@Override
+			public void onTweetsFetched(ArrayList<Tweet> tweets)
+			{
+				ServerInfoPage.this.tweets = tweets;
+				listTwitter.setAdapter(new TweetAdapter(activity, tweets, fontApplicator));
+			}
+		});
+		
 		getFragmentManager().beginTransaction()
-				.replace(R.id.frame_server_info, this.serverInfoCard).commit();
+				.replace(R.id.frame_server_info, serverInfoCard).commit();
 		
 		if (entity != null)
 		{
