@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.mick88.convoytrucking.api.ApiConnection;
 import com.mick88.convoytrucking.base.BaseFragment;
+import com.mick88.convoytrucking.forum.ForumRssPage;
 import com.mick88.convoytrucking.houses.HouseListPage;
 import com.mick88.convoytrucking.navigation.AppMenuItem;
 import com.mick88.convoytrucking.scoretable.ScoretablePage;
@@ -101,6 +102,15 @@ public class ConvoyTruckingApp extends Application
 					return new VehicleListPage();
 				}
 				
+			},
+			new AppMenuItem(R.string.title_vehicles, R.drawable.ic_launcher)
+			{
+				
+				@Override
+				public BaseFragment getPage()
+				{
+					return new ForumRssPage();
+				}
 			},
 		};		
 		
