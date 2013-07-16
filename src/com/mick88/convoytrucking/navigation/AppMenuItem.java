@@ -1,6 +1,6 @@
 package com.mick88.convoytrucking.navigation;
 
-import com.mick88.convoytrucking.base.BasePageFragment;
+import com.mick88.convoytrucking.base.BaseFragment;
 
 
 /**
@@ -31,5 +31,5 @@ public abstract class AppMenuItem
 		return iconId;
 	}
 	
-	public abstract BasePageFragment<?> getPage();
+	public abstract BaseFragment getPage();
 }

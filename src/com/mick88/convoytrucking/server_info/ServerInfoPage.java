@@ -14,6 +14,7 @@ import com.mick88.convoytrucking.ConvoyTruckingApp;
 import com.mick88.convoytrucking.R;
 import com.mick88.convoytrucking.api.ApiConnection;
 import com.mick88.convoytrucking.api.ApiRequest;
+import com.mick88.convoytrucking.base.BaseFragment;
 import com.mick88.convoytrucking.base.BasePageFragment;
 import com.mick88.convoytrucking.cards.DataCardFragment;
 import com.mick88.convoytrucking.twitter.Tweet;

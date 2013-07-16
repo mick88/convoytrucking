@@ -6,13 +6,11 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.mick88.convoytrucking.R;
 import com.mick88.convoytrucking.base.BaseActivity;
+import com.mick88.convoytrucking.base.BaseFragment;
 import com.mick88.convoytrucking.base.BasePageFragment;
-import com.mick88.convoytrucking.houses.HouseListPage;
 import com.mick88.convoytrucking.interfaces.RefreshListener;
 import com.mick88.convoytrucking.navigation.AppMenuItem;
-import com.mick88.convoytrucking.scoretable.ScoretablePage;
 import com.mick88.convoytrucking.server_info.ServerInfoPage;
-import com.mick88.convoytrucking.vehicles.VehicleListPage;
 
 public final class MainActivity extends BaseActivity
 {
@@ -38,12 +36,12 @@ public final class MainActivity extends BaseActivity
 	 * Gets currently displayed page fragment
 	 * @return
 	 */
-	public BasePageFragment<?> getCurrentPage()
+	public BaseFragment getCurrentPage()
 	{
 		Fragment fragment  = getSupportFragmentManager().findFragmentById(R.id.fragment);
 		if (fragment instanceof BasePageFragment<?>)
 		{
-			 return (BasePageFragment<?>) fragment;
+			 return (BaseFragment) fragment;
 		}
 		return null;
 	}
@@ -58,7 +56,7 @@ public final class MainActivity extends BaseActivity
 	/**
 	 * Opens page without adding it to the back stack
 	 */
-	public void openPage(BasePageFragment<?> page)
+	public void openPage(BaseFragment page)
 	{		
 		openPage(page, false);
 	}
@@ -68,7 +66,7 @@ public final class MainActivity extends BaseActivity
 	 * @param page PageFragement implementation
 	 * @param addBackStack true to enable backbutton
 	 */
-	public void openPage(BasePageFragment<?> page, boolean addBackStack)
+	public void openPage(BaseFragment page, boolean addBackStack)
 	{
 		FragmentTransaction transaction = getSupportFragmentManager()
 			.beginTransaction()
