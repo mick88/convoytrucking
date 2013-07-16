@@ -17,6 +17,7 @@ import com.mick88.convoytrucking.interfaces.RefreshListener;
 public class ForumRssPage extends BaseFragment
 {
 	private static final String RSS_FEED_URL = "http://www.forum.convoytrucking.net/index.php?action=.xml;type=rss";
+	AsyncTask<?, ?, ?> downloadTask=null;
 	
 	@Override
 	public void onCreate(Bundle arg0)
@@ -32,16 +33,25 @@ public class ForumRssPage extends BaseFragment
 	}
 
 	@Override
-	public boolean refresh(RefreshListener listener)
+	public boolean refresh(final RefreshListener listener)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		if (downloadTask == null) return false;
+		downloadData(new OnDownloadListener()
+		{
+			
+			@Override
+			public void onDownloadFinished()
+			{
+				listener.onRefreshFinished();
+			}
+		});
+		return true;
 	}	
 
 	@Override
-	protected void downloadData(OnDownloadListener listener)
+	protected void downloadData(final OnDownloadListener listener)
 	{
-		new AsyncTask<Void, Void, List<RssItem>>()
+		downloadTask = new AsyncTask<Void, Void, List<RssItem>>()
 		{
 
 			@Override
@@ -60,8 +70,14 @@ public class ForumRssPage extends BaseFragment
 			}
 			
 			protected void onPostExecute(List<RssItem> result) {
+				downloadTask = null;
 				ListView listView = (ListView) findViewById(R.id.listView);
 				listView.setAdapter(new ArrayAdapter<RssItem>(activity, android.R.layout.simple_list_item_1, android.R.id.text1, result));
+				if (listener != null) listener.onDownloadFinished();
+			};
+			
+			protected void onCancelled() {
+				downloadTask = null;
 			};
 		}.execute();
 	}
