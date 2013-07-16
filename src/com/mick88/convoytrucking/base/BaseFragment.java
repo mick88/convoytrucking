@@ -1,7 +1,5 @@
 package com.mick88.convoytrucking.base;
 
-import org.json.JSONException;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -21,14 +19,13 @@ import com.actionbarsherlock.view.MenuItem;
 import com.mick88.convoytrucking.ConvoyTruckingApp;
 import com.mick88.convoytrucking.R;
 import com.mick88.convoytrucking.activities.MainActivity;
-import com.mick88.convoytrucking.api.ApiRequest;
-import com.mick88.convoytrucking.api.ApiRequest.ApiRequestListener;
-import com.mick88.convoytrucking.api.entities.ApiEntity;
-import com.mick88.convoytrucking.api.entities.ApiError;
 import com.mick88.convoytrucking.interfaces.OnDownloadListener;
 import com.mick88.convoytrucking.interfaces.RefreshListener;
 import com.mick88.util.FontApplicator;
 
+/**
+ * base fragment for all pages
+ */
 public abstract class BaseFragment extends SherlockFragment
 {
 	protected ViewGroup rootView = null;
@@ -36,11 +33,22 @@ public abstract class BaseFragment extends SherlockFragment
 	protected ConvoyTruckingApp application;
 	protected FontApplicator fontApplicator = null;
 
-	public BaseFragment() {
-		super();
-	}
-
+	/**
+	 * specifies which layout should be inflated for this fragment
+	 * @return
+	 */
 	protected abstract int selectLayout();
+	
+	/**
+	 * Downloads data in background if not already downloading 
+	 * @return false if data is already being downloaded
+	 */
+	public abstract boolean refresh(final RefreshListener listener);
+	
+	/**
+	 * Downloads data in background
+	 */
+	protected abstract void downloadData(final OnDownloadListener listener);
 
 	/**
 	 * Allows fragment to introduce required settings to the actionbar. Super
@@ -73,8 +81,7 @@ public abstract class BaseFragment extends SherlockFragment
 		return null;
 	}
 
-	public abstract boolean refresh(final RefreshListener listener);
-	protected abstract void downloadData(final OnDownloadListener listener);
+	
 
 	/**
 	 * checks if view is created and entity exists, then calls fillContents()
