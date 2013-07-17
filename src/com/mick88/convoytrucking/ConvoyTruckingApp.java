@@ -103,7 +103,7 @@ public class ConvoyTruckingApp extends Application
 				}
 				
 			},
-			new AppMenuItem(R.string.title_vehicles, R.drawable.ic_launcher)
+			new AppMenuItem(R.string.title_forum_posts, R.drawable.ic_nav_rss)
 			{
 				
 				@Override
