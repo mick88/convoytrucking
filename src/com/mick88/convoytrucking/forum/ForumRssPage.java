@@ -2,8 +2,13 @@ package com.mick88.convoytrucking.forum;
 
 import java.util.List;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.mick88.convoytrucking.ConvoyTruckingApp;
@@ -17,10 +22,11 @@ import com.mick88.convoytrucking.interfaces.RefreshListener;
 import com.mick88.util.FontApplicator;
 import com.mick88.util.HttpUtils;
 
-public class ForumRssPage extends BaseFragment
+public class ForumRssPage extends BaseFragment implements OnItemClickListener
 {
 	private static final String RSS_FEED_URL = "http://www.forum.convoytrucking.net/index.php?action=.xml;type=rss";
-	AsyncTask<?, ?, ?> downloadTask=null;
+	private AsyncTask<?, ?, ?> downloadTask=null;
+	private ListView listView;
 	
 	@Override
 	public void onCreate(Bundle arg0)
@@ -50,6 +56,14 @@ public class ForumRssPage extends BaseFragment
 		});
 		return true;
 	}
+	
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState)
+	{
+		super.onViewCreated(view, savedInstanceState);
+		listView = (ListView) findViewById(R.id.listView);
+		listView.setOnItemClickListener(this);
+	}
 
 	@Override
 	protected void downloadData(final OnDownloadListener listener)
@@ -64,9 +78,9 @@ public class ForumRssPage extends BaseFragment
 				try
 				{
 					return new RssReader(RSS_FEED_URL).read();
-				} catch (Exception e)
+				} 
+				catch (Exception e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 					return null;
 				}
@@ -74,9 +88,14 @@ public class ForumRssPage extends BaseFragment
 			
 			protected void onPostExecute(List<RssItem> result) {
 				downloadTask = null;
-				ListView listView = (ListView) findViewById(R.id.listView);
+				if (result == null) return;
+				
 				HttpUtils webHandler = new HttpUtils();
-				listView.setAdapter(new RssPostAdapter(activity, result, new FontApplicator(activity.getAssets(), ConvoyTruckingApp.FONT_ROBOTO_LIGHT), webHandler, webHandler));
+				
+				RssPostAdapter adapter = new RssPostAdapter(activity, result, new FontApplicator(activity.getAssets(), ConvoyTruckingApp.FONT_ROBOTO_LIGHT), webHandler, webHandler);
+				
+				listView.setAdapter(adapter);
+				
 				if (listener != null) listener.onDownloadFinished();
 			};
 			
@@ -84,6 +103,16 @@ public class ForumRssPage extends BaseFragment
 				downloadTask = null;
 			};
 		}.execute();
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> adapterView, View arg1, int arg2, long arg3)
+	{
+		RssItem rssItem = (RssItem) adapterView.getItemAtPosition(arg2);
+		String link = rssItem.getLink();
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse(link));
+		startActivity(intent);
 	}
 
 }

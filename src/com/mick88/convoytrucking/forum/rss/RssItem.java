@@ -12,7 +12,7 @@ public class RssItem
 	
 	public void setLink(String link)
 	{
-		this.link = link;
+		this.link = link.trim();
 	}
 	
 	public void setDate(String date)
