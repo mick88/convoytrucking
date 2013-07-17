@@ -38,7 +38,7 @@ public class ForumRssPage extends BaseFragment
 	@Override
 	public boolean refresh(final RefreshListener listener)
 	{
-		if (downloadTask == null) return false;
+		if (downloadTask != null) return false;
 		downloadData(new OnDownloadListener()
 		{
 			
