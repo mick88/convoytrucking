@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.mick88.convoytrucking.ConvoyTruckingApp;
 import com.mick88.convoytrucking.R;
 import com.mick88.convoytrucking.base.BaseFragment;
 import com.mick88.convoytrucking.forum.rss.RssItem;
@@ -14,6 +15,7 @@ import com.mick88.convoytrucking.forum.rss.RssPostAdapter;
 import com.mick88.convoytrucking.forum.rss.RssReader;
 import com.mick88.convoytrucking.interfaces.OnDownloadListener;
 import com.mick88.convoytrucking.interfaces.RefreshListener;
+import com.mick88.util.FontApplicator;
 
 public class ForumRssPage extends BaseFragment
 {
@@ -73,7 +75,7 @@ public class ForumRssPage extends BaseFragment
 			protected void onPostExecute(List<RssItem> result) {
 				downloadTask = null;
 				ListView listView = (ListView) findViewById(R.id.listView);
-				listView.setAdapter(new RssPostAdapter(activity, result));
+				listView.setAdapter(new RssPostAdapter(activity, result, new FontApplicator(activity.getAssets(), ConvoyTruckingApp.FONT_ROBOTO_LIGHT)));
 				if (listener != null) listener.onDownloadFinished();
 			};
 			
