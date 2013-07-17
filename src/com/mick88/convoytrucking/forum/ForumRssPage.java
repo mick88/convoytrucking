@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.mick88.convoytrucking.R;
 import com.mick88.convoytrucking.base.BaseFragment;
 import com.mick88.convoytrucking.forum.rss.RssItem;
+import com.mick88.convoytrucking.forum.rss.RssPostAdapter;
 import com.mick88.convoytrucking.forum.rss.RssReader;
 import com.mick88.convoytrucking.interfaces.OnDownloadListener;
 import com.mick88.convoytrucking.interfaces.RefreshListener;
@@ -72,7 +73,7 @@ public class ForumRssPage extends BaseFragment
 			protected void onPostExecute(List<RssItem> result) {
 				downloadTask = null;
 				ListView listView = (ListView) findViewById(R.id.listView);
-				listView.setAdapter(new ArrayAdapter<RssItem>(activity, android.R.layout.simple_list_item_1, android.R.id.text1, result));
+				listView.setAdapter(new RssPostAdapter(activity, result));
 				if (listener != null) listener.onDownloadFinished();
 			};
 			

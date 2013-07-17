@@ -1,5 +1,8 @@
 package com.mick88.convoytrucking.forum.rss;
 
+import android.text.Html;
+import android.text.Spanned;
+
 public class RssItem
 {
 	private String title, link, desciption, date;
@@ -16,7 +19,7 @@ public class RssItem
 	
 	public void setDate(String date)
 	{
-		this.date = date;
+		this.date = date.trim();
 	}
 	
 	public void setDesciption(String desciption)
@@ -42,6 +45,12 @@ public class RssItem
 	public String getTitle()
 	{
 		return title;
+	}
+	
+	
+	public Spanned getHtmlDescription()
+	{
+		return Html.fromHtml(getDesciption());
 	}
 	
 	@Override

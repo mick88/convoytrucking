@@ -42,8 +42,8 @@ public class SaxHandler extends DefaultHandler
 				currentItem.setDate(stringBuilder.toString());
 			else if (localName.equalsIgnoreCase(ITEM))
 				rssItems.add(currentItem);
-			stringBuilder.setLength(0);
 		}
+		stringBuilder.setLength(0);
 	}
 
 	@Override
@@ -58,6 +58,7 @@ public class SaxHandler extends DefaultHandler
 			org.xml.sax.Attributes attributes) throws SAXException
 	{
 		super.startElement(uri, localName, qName, attributes);
+		
 		if (localName.equalsIgnoreCase(ITEM))
 		{
 			this.currentItem = new RssItem();
