@@ -1,7 +1,5 @@
 package com.mick88.convoytrucking.forum.rss;
 
-import android.text.Html;
-import android.text.Spanned;
 
 public class RssItem
 {
@@ -45,12 +43,6 @@ public class RssItem
 	public String getTitle()
 	{
 		return title;
-	}
-	
-	
-	public Spanned getHtmlDescription()
-	{
-		return Html.fromHtml(getDesciption());
 	}
 	
 	@Override

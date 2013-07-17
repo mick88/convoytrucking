@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import com.mick88.convoytrucking.api.entities.ApiEntity;
 import com.mick88.convoytrucking.api.entities.ApiEntityCollection;
 import com.mick88.convoytrucking.server_info.ServerInfoEntity;
-import com.mick88.util.HttpGetter;
+import com.mick88.util.HttpUtils;
 
 public class ApiConnection
 {
@@ -54,7 +54,7 @@ public class ApiConnection
 				.append('=')
 				.append(entry.getValue());
 		}
-		return HttpGetter.getString(url.toString());
+		return HttpUtils.getString(url.toString());
 	}
 	
 	public JSONObject getJson(Map<String,String> params) throws IOException, JSONException
