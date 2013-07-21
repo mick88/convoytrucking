@@ -145,17 +145,7 @@ public abstract class BaseListPageFragment<ET extends ApiEntity, T extends ApiEn
 			((ListView) listView).setDivider(null);
 			
 		}
-		
-		findViewById(R.id.btnLoadMore).setOnClickListener(new OnClickListener()
-		{
-			
-			@Override
-			public void onClick(View v)
-			{
-				loadNextPage();
-				
-			}
-		});
+
 		fillViewContents();
 	}
 	
