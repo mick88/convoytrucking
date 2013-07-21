@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnLoadMore"
+        android:layout_width="202dp"
+        android:layout_height="wrap_content"
+        android:text="Load more"
+        android:visibility="gone" />
+
+    <GridView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:drawSelectorOnTop="true"
+        android:visibility="visible"
+        android:fastScrollEnabled="true"
+        android:numColumns="2"
+        tools:listitem="@layout/card_house_small" />
+
+</LinearLayout>
