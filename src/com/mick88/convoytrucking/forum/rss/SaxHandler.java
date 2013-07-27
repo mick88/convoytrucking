@@ -35,7 +35,7 @@ public class SaxHandler extends DefaultHandler
 			if (localName.equalsIgnoreCase(TITLE))
 				currentItem.setTitle(stringBuilder.toString());
 			else if (localName.equalsIgnoreCase(DESCRIPTION))
-				currentItem.setDesciption(stringBuilder.toString());
+				currentItem.setContent(stringBuilder.toString());
 			else if (localName.equalsIgnoreCase(LINK))
 				currentItem.setLink(stringBuilder.toString());
 			else if (localName.equalsIgnoreCase(PUB_DATE))

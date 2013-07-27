@@ -2,11 +2,7 @@ package com.mick88.convoytrucking.forum.rss;
 
 import java.util.List;
 
-import com.mick88.convoytrucking.R;
-import com.mick88.util.FontApplicator;
-
 import android.content.Context;
-import android.text.Html;
 import android.text.Html.ImageGetter;
 import android.text.Html.TagHandler;
 import android.view.LayoutInflater;
@@ -14,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.mick88.convoytrucking.R;
+import com.mick88.util.FontApplicator;
 
 
 public class RssPostAdapter extends ArrayAdapter<RssItem>
@@ -53,7 +52,7 @@ public class RssPostAdapter extends ArrayAdapter<RssItem>
 		
 		
 		tvTitle.setText(getItem(position).getTitle());
-		tvContent.setText(Html.fromHtml(getItem(position).getDesciption(), imageGetter, tagHandler));
+		tvContent.setText(getItem(position).getContent());
 		tvTime.setText(getItem(position).getDate());
 		
 		return view;
