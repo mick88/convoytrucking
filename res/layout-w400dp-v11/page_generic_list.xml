@@ -22,6 +22,8 @@
         android:visibility="visible"
         android:fastScrollEnabled="true"
         android:numColumns="@integer/num_columns"
-        tools:listitem="@layout/card_house_small" />
+        tools:listitem="@layout/card_house_small"
+        android:horizontalSpacing="@dimen/card_margin"
+        android:verticalSpacing="@dimen/card_margin" />
 
 </LinearLayout>
