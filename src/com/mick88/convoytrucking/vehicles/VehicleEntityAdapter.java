@@ -53,7 +53,7 @@ public class VehicleEntityAdapter extends BaseEntityAdapter<VehicleEntity>
 		holder.tvName.setText(entity.getName());
 		holder.tvPrice.setText(entity.getPriceString());
 		if (entity.getTopSpeedKph() == 0)
-			holder.tvTopSpeed.setVisibility(View.GONE);
+			holder.tvTopSpeed.setVisibility(View.INVISIBLE);
 		else
 		{
 			holder.tvTopSpeed.setText(new StringBuilder("Top Speed: ").append(entity.getTopSpeedKphString()));
