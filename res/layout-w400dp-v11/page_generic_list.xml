@@ -21,7 +21,7 @@
         android:drawSelectorOnTop="true"
         android:visibility="visible"
         android:fastScrollEnabled="true"
-        android:numColumns="auto_fit"
+        android:numColumns="@integer/num_columns"
         tools:listitem="@layout/card_house_small" />
 
 </LinearLayout>
