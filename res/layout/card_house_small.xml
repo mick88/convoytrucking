@@ -55,7 +55,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvHousePrice"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/tvHousePrice"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="Owned by mick88"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
