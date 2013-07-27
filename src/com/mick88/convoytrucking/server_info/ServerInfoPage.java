@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.mick88.convoytrucking.ConvoyTruckingApp;
@@ -32,13 +33,18 @@ public class ServerInfoPage extends BasePageFragment<ServerInfoEntity>
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void onCreate(Bundle arg0)
+	public void onCreate(Bundle savedInstanceState)
 	{
-		super.onCreate(arg0);
+		super.onCreate(savedInstanceState);
 		serverInfoCard = new ServerInfoCard();
-		if (arg0 != null)
+		if (savedInstanceState != null) setTweets((ArrayList<Tweet>) savedInstanceState.getSerializable(EXTRA_TWEETS));
+	}
+	
+	public void setTweets(ArrayList<Tweet> tweets)
+	{
+		if (tweets != null)
 		{
-			tweets = (ArrayList<Tweet>) arg0.getSerializable(EXTRA_TWEETS);
+			this.tweets = tweets;
 		}
 	}
 	
@@ -104,17 +110,23 @@ public class ServerInfoPage extends BasePageFragment<ServerInfoEntity>
 		listTwitter.setAdapter(new ArrayAdapter<Tweet>(activity, android.R.layout.simple_list_item_1, new Tweet[]{}));
 		
 		if (tweets != null ) listTwitter.setAdapter(new TweetAdapter(activity, tweets, fontApplicator));
-		else new Twitter(ConvoyTruckingApp.TWITTER_FEED_URL).fetchFeedAsync(new OnTweetsFetchedListener()
+		else 
 		{
-			
-			@Override
-			public void onTweetsFetched(ArrayList<Tweet> tweets)
+			final ProgressBar tweetProgressBar = (ProgressBar) findViewById(R.id.progressTweets);
+			tweetProgressBar.setVisibility(View.VISIBLE);
+			new Twitter(ConvoyTruckingApp.TWITTER_FEED_URL).fetchFeedAsync(new OnTweetsFetchedListener()			
 			{
-				ServerInfoPage.this.tweets = tweets;
-				listTwitter.setAdapter(new TweetAdapter(activity, tweets, fontApplicator));
-			}
-		});
-		
+				
+				@Override
+				public void onTweetsFetched(ArrayList<Tweet> tweets)
+				{
+					ServerInfoPage.this.tweets = tweets;
+					listTwitter.setAdapter(new TweetAdapter(activity, tweets, fontApplicator));
+					tweetProgressBar.setVisibility(View.GONE);
+				}
+			});
+		}
+	
 		getFragmentManager().beginTransaction()
 				.replace(R.id.frame_server_info, serverInfoCard).commit();
 		
