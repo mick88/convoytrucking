@@ -144,7 +144,7 @@ public class PlayerEntity extends ApiEntity
 			new PlayerStat("Van", statVan),
 			new PlayerStat("Towtruck", statTow),
 			
-			new PlayerStat("Failer missions", statFailed),
+			new PlayerStat("Failed missions", statFailed),
 			new PlayerStat("Overloads", statOverloads),
 			new PlayerStat("Total distance", statOdo, StatType.Distance),
 			new PlayerStat("Time online", statTime, StatType.Time),				

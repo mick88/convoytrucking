@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,7 +24,7 @@ import com.mick88.convoytrucking.interfaces.OnDownloadListener;
 public abstract class BaseListPageFragment<ET extends ApiEntity, T extends ApiEntityCollection<ET>> 
 	extends BasePageFragment<T> implements OnItemClickListener, OnScrollListener
 {
-	ListView listView = null;
+	AbsListView listView = null;
 	protected int itemsPerPage = 20,
 			page = 0,
 			pageBufferSize = itemsPerPage;
@@ -63,12 +64,12 @@ public abstract class BaseListPageFragment<ET extends ApiEntity, T extends ApiEn
 		super.downloadData(listener);
 	}
 	
+	@SuppressLint("NewApi")
 	private void fillList()
 	{
 		if (entity != null && listView != null)
 		{
 			hideProgressBar();			
-
 			listView.setAdapter(createAdapter(entity.getEntities()));
 		}
 	}	
@@ -136,20 +137,15 @@ public abstract class BaseListPageFragment<ET extends ApiEntity, T extends ApiEn
 	{
 		super.onViewCreated(view, savedInstanceState);
 		
-		this.listView = (ListView) rootView.findViewById(R.id.listView);
+		this.listView = (AbsListView) rootView.findViewById(R.id.listView);
 		listView.setOnItemClickListener(this);
-		listView.setDivider(null);
 		listView.setOnScrollListener(this);
-		findViewById(R.id.btnLoadMore).setOnClickListener(new OnClickListener()
+		if (listView instanceof ListView)
 		{
+			((ListView) listView).setDivider(null);
 			
-			@Override
-			public void onClick(View v)
-			{
-				loadNextPage();
-				
-			}
-		});
+		}
+
 		fillViewContents();
 	}
 	

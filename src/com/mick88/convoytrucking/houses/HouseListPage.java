@@ -61,7 +61,7 @@ public class HouseListPage extends BaseListPageFragment<HouseEntity, HouseCollec
 		{
 			if (savedState.containsKey(BUNDLE_FILTER))
 			{
-				filter = savedState.getParcelable(BUNDLE_FILTER);
+				filter = (Filter) savedState.getSerializable(BUNDLE_FILTER);
 			}
 		}
 	}
@@ -111,6 +111,13 @@ public class HouseListPage extends BaseListPageFragment<HouseEntity, HouseCollec
 			setEntity(null);
 			downloadData(null);
 		}		
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState)
+	{
+		super.onSaveInstanceState(outState);
+		outState.putSerializable(BUNDLE_FILTER, filter);
 	}
 	
 	@Override
