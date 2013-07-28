@@ -18,7 +18,6 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/card_margin"
         android:layout_marginRight="@dimen/card_margin"
-        android:drawSelectorOnTop="true"
         android:fastScrollEnabled="true"
         android:horizontalSpacing="@dimen/card_margin"
         android:numColumns="@integer/num_columns"
