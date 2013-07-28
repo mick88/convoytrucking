@@ -12,19 +12,18 @@
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
-
-    <ListView
+    <GridView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:drawSelectorOnTop="true"
-        android:visibility="visible"
-        android:fastScrollEnabled="true"        
-        tools:listitem="@layout/card_house_small"
         android:layout_marginLeft="@dimen/card_margin"
         android:layout_marginRight="@dimen/card_margin"
-        android:dividerHeight="@dimen/card_margin"
-        android:divider="@android:color/transparent"
-        android:headerDividersEnabled="true"/>
+        android:drawSelectorOnTop="true"
+        android:fastScrollEnabled="true"
+        android:horizontalSpacing="@dimen/card_margin"
+        android:numColumns="@integer/num_columns"
+        android:verticalSpacing="@dimen/card_margin"
+        android:visibility="visible"
+        tools:listitem="@layout/card_house_small" />
 
 </LinearLayout>
