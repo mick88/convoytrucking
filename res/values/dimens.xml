@@ -9,5 +9,6 @@
 	<dimen name="card_margin_sides">@dimen/card_margin</dimen>
 	<dimen name="card_margin_top_bottom">@dimen/card_margin</dimen>
 	<dimen name="menu_icon_size">32dp</dimen>
+	<dimen name="nav_drawer_width">200dp</dimen>
 	
 </resources>
