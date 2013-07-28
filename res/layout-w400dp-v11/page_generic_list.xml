@@ -13,14 +13,17 @@
         android:visibility="gone" />
 
 
-    <ListView
+
+    <GridView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:drawSelectorOnTop="true"
         android:visibility="visible"
         android:fastScrollEnabled="true"
-        
-        tools:listitem="@layout/card_house_small" />
+        android:numColumns="@integer/num_columns"
+        tools:listitem="@layout/card_house_small"
+        android:horizontalSpacing="@dimen/card_margin"
+        android:verticalSpacing="@dimen/card_margin" />
 
 </LinearLayout>

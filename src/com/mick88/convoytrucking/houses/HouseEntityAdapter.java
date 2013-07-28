@@ -18,18 +18,16 @@ public class HouseEntityAdapter extends BaseEntityAdapter<HouseEntity>
 		final TextView tvCaption,
 			tvPrice,
 			tvSlots,
-			tvGroupLabel,
 			tvOwner;
 		final ImageView imgHouseImage;
 		
-		public HouseViewContainer(TextView tvCaption, TextView tvPrice, TextView tvSlots, ImageView imgHouseImage, TextView tvOwner, TextView tvGroupLabel)
+		public HouseViewContainer(TextView tvCaption, TextView tvPrice, TextView tvSlots, ImageView imgHouseImage, TextView tvOwner)
 		{
 			this.tvCaption = tvCaption;
 			this.tvPrice = tvPrice;
 			this.tvSlots = tvSlots;
 			this.tvOwner = tvOwner;
 			this.imgHouseImage = imgHouseImage;
-			this.tvGroupLabel = tvGroupLabel;
 		}
 	}
 	
@@ -46,29 +44,6 @@ public class HouseEntityAdapter extends BaseEntityAdapter<HouseEntity>
 	{
 		return layout;
 	}
-	
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent)
-	{
-		View view;
-		if (convertView == null)
-		{
-			View outer = getInflater().inflate(R.layout.card_house_group, parent, false);
-			View card = getInflater().inflate(R.layout.card, (ViewGroup) outer.findViewById(R.id.cardContainer), true);
-			view = getInflater().inflate(selectItemLayout(), (ViewGroup) card.findViewById(R.id.card_root),  true);
-			fontApplicator.applyFont(outer);
-			view = outer;
-			fillItemContent(view, getItem(position), position);
-		}
-		else
-		{
-			view = convertView;
-			fillItemContent(view, getItem(position), position);
-		}
-		
-
-		return view;
-	}
 
 	@Override
 	protected void fillItemContent(View view, HouseEntity entity, int position)
@@ -81,8 +56,7 @@ public class HouseEntityAdapter extends BaseEntityAdapter<HouseEntity>
 					(TextView)view.findViewById(R.id.tvHousePrice),
 					(TextView)view.findViewById(R.id.tvHouseSlots),
 					(ImageView)view.findViewById(R.id.imHouseImage),
-					(TextView)view.findViewById(R.id.tvHouseOwner),
-					(TextView) view.findViewById(R.id.tvGroupLabel));
+					(TextView)view.findViewById(R.id.tvHouseOwner));
 		}
 		
 		container.tvCaption.setText(entity.getAddress());
@@ -100,13 +74,6 @@ public class HouseEntityAdapter extends BaseEntityAdapter<HouseEntity>
 			container.tvOwner.setTextColor(context.getResources().getColor(R.color.red));
 			container.tvOwner.setText("Unavailable");
 		}
-
-		if (position == 0 || getItem(position-1).getSlots() != entity.getSlots())
-		{
-			container.tvGroupLabel.setText(new StringBuilder().append(getItem(position).getSlots()).append(" slots:"));
-			container.tvGroupLabel.setVisibility(View.VISIBLE);
-		}
-		else container.tvGroupLabel.setVisibility(View.GONE);
 		
 		container.imgHouseImage.setImageResource(R.drawable.generic_house);
 		entity.setSmallImageToView(container.imgHouseImage);
