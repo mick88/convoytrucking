@@ -9,7 +9,8 @@
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
         android:gravity="start"
-        android:orientation="vertical" >
+        android:orientation="vertical" 
+        android:layout_margin="@dimen/card_margin">
         
         <View 
             android:id="@+id/center"

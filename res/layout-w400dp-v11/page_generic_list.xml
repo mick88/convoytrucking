@@ -24,6 +24,8 @@
         android:numColumns="@integer/num_columns"
         tools:listitem="@layout/card_house_small"
         android:horizontalSpacing="@dimen/card_margin"
-        android:verticalSpacing="@dimen/card_margin" />
+        android:verticalSpacing="@dimen/card_margin" 
+        android:layout_marginLeft="@dimen/card_margin"
+        android:layout_marginRight="@dimen/card_margin"/>
 
 </LinearLayout>
