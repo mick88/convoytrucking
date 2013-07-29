@@ -1,8 +1,5 @@
 package com.mick88.convoytrucking.base;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.json.JSONException;
 
 import android.app.Activity;
@@ -29,7 +26,6 @@ import com.mick88.convoytrucking.api.ApiRequest;
 import com.mick88.convoytrucking.api.ApiRequest.ApiRequestListener;
 import com.mick88.convoytrucking.api.entities.ApiEntity;
 import com.mick88.convoytrucking.api.entities.ApiError;
-import com.mick88.convoytrucking.cards.CardFragment;
 import com.mick88.convoytrucking.interfaces.OnDownloadListener;
 import com.mick88.convoytrucking.interfaces.RefreshListener;
 import com.mick88.util.FontApplicator;
@@ -47,7 +43,6 @@ public abstract class BasePageFragment<T extends ApiEntity> extends
 	protected T entity;
 	protected MainActivity activity = null;
 	protected ConvoyTruckingApp application;
-	protected List<CardFragment> cards = new ArrayList<CardFragment>();
 	protected ViewGroup rootView = null;
 	ApiConnection connection;
 	ApiRequest pendingRequest = null;
@@ -108,7 +103,6 @@ public abstract class BasePageFragment<T extends ApiEntity> extends
 
 	protected void downloadData(final OnDownloadListener listener)
 	{
-		Log.d(toString(), "Downloading data");
 		pendingRequest = createRequest().SendAsync(new ApiRequestListener()
 		{
 			@Override
@@ -159,7 +153,6 @@ public abstract class BasePageFragment<T extends ApiEntity> extends
 	public void onAttach(Activity activity)
 	{
 		super.onAttach(activity);
-		Log.d(toString(), "Fragment attached");
 		this.activity = (MainActivity) activity;
 		this.fontApplicator = new FontApplicator(activity.getAssets(),
 				ConvoyTruckingApp.FONT_ROBOTO_LIGHT);
@@ -170,8 +163,6 @@ public abstract class BasePageFragment<T extends ApiEntity> extends
 	public void onCreate(android.os.Bundle arg0)
 	{
 		super.onCreate(arg0);
-
-		Log.d(toString(), "Fragment created");
 
 		this.activity = (MainActivity) getActivity();
 		this.application = (ConvoyTruckingApp) activity.getApplication();
@@ -265,7 +256,6 @@ public abstract class BasePageFragment<T extends ApiEntity> extends
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
-		Log.d(toString(), "Fragment view created");
 		rootView = (ViewGroup) inflater.inflate(selectLayout(), null);
 		fontApplicator.applyFont(rootView);
 		fillViewContents();
@@ -275,16 +265,8 @@ public abstract class BasePageFragment<T extends ApiEntity> extends
 	}
 
 	@Override
-	public void onDestroy()
-	{
-		Log.d(toString(), "Fragment destroyed");
-		super.onDestroy();
-	}
-
-	@Override
 	public void onDestroyView()
 	{
-		Log.d(toString(), "Fragment view destroyed");
 		rootView = null;
 		super.onDestroyView();
 	}
