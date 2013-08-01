@@ -108,21 +108,25 @@ public abstract class BasePageFragment<T extends ApiEntity> extends
 			@Override
 			public void onRequestComplete(ApiRequest apiRequest)
 			{
-				try
+				if (apiRequest.isEmpty() == false)
 				{
-					setEntity(createEntity(apiRequest.getResult()));
-				} catch (JSONException e)
-				{
-					ApiError error = apiRequest.getError();
-					if (error != null)
+					try
 					{
-						Log.e(getClass().getName(), error.getMessage());
-					} else
-						Log.e(getClass().getName(),
-								"Unknown error while parsing "
-										+ apiRequest.getResult());
+						setEntity(createEntity(apiRequest.getResult()));
+					} catch (JSONException e)
+					{
+						ApiError error = apiRequest.getError();
+						if (error != null)
+						{
+							Log.e(getClass().getName(), error.getMessage());
+						} else
+							Log.e(getClass().getName(),
+									"Unknown error while parsing "
+											+ apiRequest.getResult());
+					}
 				}
 				pendingRequest = null;
+				
 				if (listener != null)
 					listener.onDownloadFinished();
 			}

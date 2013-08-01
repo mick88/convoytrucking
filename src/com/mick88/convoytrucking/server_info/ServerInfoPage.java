@@ -114,14 +114,16 @@ public class ServerInfoPage extends BasePageFragment<ServerInfoEntity>
 			final ProgressBar tweetProgressBar = (ProgressBar) findViewById(R.id.progressTweets);
 			tweetProgressBar.setVisibility(View.VISIBLE);
 			new Twitter(ConvoyTruckingApp.TWITTER_FEED_URL).fetchFeedAsync(new OnTweetsFetchedListener()			
-			{
-				
+			{				
 				@Override
 				public void onTweetsFetched(ArrayList<Tweet> tweets)
 				{
-					ServerInfoPage.this.tweets = tweets;
-					listTwitter.setAdapter(new TweetAdapter(activity, tweets, fontApplicator));
-					tweetProgressBar.setVisibility(View.GONE);
+					if (tweets != null)
+					{
+						ServerInfoPage.this.tweets = tweets;
+						listTwitter.setAdapter(new TweetAdapter(activity, tweets, fontApplicator));
+						tweetProgressBar.setVisibility(View.GONE);
+					}
 				}
 			});
 		}

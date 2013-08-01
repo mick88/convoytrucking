@@ -40,6 +40,11 @@ public class ApiRequest
 	private String result;
 	private BeforeFinishListener beforeFinishListener = null;
 	
+	public boolean isEmpty()
+	{
+		return TextUtils.isEmpty(result);
+	}
+	
 	public ApiRequest(ApiConnection apiConnection, Map<String,String> params)
 	{
 		this.params = params;
