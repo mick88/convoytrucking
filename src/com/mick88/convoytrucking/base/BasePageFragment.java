@@ -3,6 +3,7 @@ package com.mick88.convoytrucking.base;
 import org.json.JSONException;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -108,6 +109,7 @@ public abstract class BasePageFragment<T extends ApiEntity> extends
 			@Override
 			public void onRequestComplete(ApiRequest apiRequest)
 			{
+				String errorMessage = null;
 				if (apiRequest.isEmpty() == false)
 				{
 					try
@@ -119,12 +121,29 @@ public abstract class BasePageFragment<T extends ApiEntity> extends
 						if (error != null)
 						{
 							Log.e(getClass().getName(), error.getMessage());
+							errorMessage = error.getMessage();
+							
 						} else
+						{
 							Log.e(getClass().getName(),
 									"Unknown error while parsing "
 											+ apiRequest.getResult());
+							errorMessage = "Unknown error while parsing received data.";
+						}
+						
 					}
 				}
+				else errorMessage = "No data received from server";
+				
+				if (errorMessage != null)
+				{
+					new AlertDialog.Builder(activity)
+						.setTitle("Error")
+//						.setMessage(errorMessage).setPositiveButton("Retry", null)
+						.setNegativeButton(android.R.string.cancel, null)
+						.show();
+				}
+				
 				pendingRequest = null;
 				
 				if (listener != null)
