@@ -103,7 +103,7 @@ public class ConvoyTruckingApp extends Application
 				}
 				
 			},
-			new AppMenuItem(R.string.title_forum_posts, R.drawable.ic_nav_rss)
+			/*new AppMenuItem(R.string.title_forum_posts, R.drawable.ic_nav_rss)
 			{
 				
 				@Override
@@ -111,7 +111,7 @@ public class ConvoyTruckingApp extends Application
 				{
 					return new ForumRssPage();
 				}
-			},
+			},*/
 		};		
 		
 		
