@@ -167,7 +167,7 @@ public abstract class BaseFragment extends SherlockFragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		Log.d(toString(), "Fragment view created");
-		rootView = (ViewGroup) inflater.inflate(selectLayout(), null);
+		rootView = (ViewGroup) inflater.inflate(selectLayout(), container, false);
 		fontApplicator.applyFont(rootView);
 		fillViewContents();
 	
