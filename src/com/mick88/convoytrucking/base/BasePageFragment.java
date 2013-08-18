@@ -1,11 +1,10 @@
 package com.mick88.convoytrucking.base;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.json.JSONException;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +18,6 @@ import com.mick88.convoytrucking.api.ApiRequest;
 import com.mick88.convoytrucking.api.ApiRequest.ApiRequestListener;
 import com.mick88.convoytrucking.api.entities.ApiEntity;
 import com.mick88.convoytrucking.api.entities.ApiError;
-import com.mick88.convoytrucking.cards.CardFragment;
 import com.mick88.convoytrucking.interfaces.OnDownloadListener;
 import com.mick88.convoytrucking.interfaces.RefreshListener;
 import com.mick88.util.FontApplicator;
@@ -69,6 +67,7 @@ public abstract class BasePageFragment<T extends ApiEntity> extends
 			@Override
 			public void onRequestComplete(ApiRequest apiRequest)
 			{
+				String errorMessage = null;
 				if (apiRequest.isEmpty() == false)
 				{
 					try
@@ -80,12 +79,37 @@ public abstract class BasePageFragment<T extends ApiEntity> extends
 						if (error != null)
 						{
 							Log.e(getClass().getName(), error.getMessage());
+							errorMessage = error.getMessage();
+							
 						} else
+						{
 							Log.e(getClass().getName(),
 									"Unknown error while parsing "
 											+ apiRequest.getResult());
+							errorMessage = "Unknown error while parsing received data.";
+						}
+						
 					}
 				}
+				else errorMessage = "No data received from server";
+				
+				if (errorMessage != null)
+				{
+					new AlertDialog.Builder(activity)
+						.setTitle("Error")
+						.setMessage(errorMessage).setPositiveButton("Retry", new DialogInterface.OnClickListener()
+						{
+							
+							@Override
+							public void onClick(DialogInterface dialog, int which)
+							{
+								downloadData(listener);								
+							}
+						})
+						.setNegativeButton(android.R.string.cancel, null)
+						.show();
+				}
+				
 				pendingRequest = null;
 				
 				if (listener != null)
