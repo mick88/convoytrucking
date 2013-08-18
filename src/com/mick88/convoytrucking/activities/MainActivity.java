@@ -39,7 +39,7 @@ public final class MainActivity extends BaseActivity
 	public BaseFragment getCurrentPage()
 	{
 		Fragment fragment  = getSupportFragmentManager().findFragmentById(R.id.fragment);
-		if (fragment instanceof BasePageFragment<?>)
+		if (fragment instanceof BaseFragment)
 		{
 			 return (BaseFragment) fragment;
 		}
