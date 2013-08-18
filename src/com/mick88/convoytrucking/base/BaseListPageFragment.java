@@ -4,14 +4,13 @@ import java.util.List;
 
 import org.json.JSONException;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import com.mick88.convoytrucking.R;
@@ -24,7 +23,7 @@ import com.mick88.convoytrucking.interfaces.OnDownloadListener;
 public abstract class BaseListPageFragment<ET extends ApiEntity, T extends ApiEntityCollection<ET>> 
 	extends BasePageFragment<T> implements OnItemClickListener, OnScrollListener
 {
-	AbsListView listView = null;
+	AbsListView absListView = null;
 	protected int itemsPerPage = 20,
 			page = 0,
 			pageBufferSize = itemsPerPage;
@@ -64,13 +63,23 @@ public abstract class BaseListPageFragment<ET extends ApiEntity, T extends ApiEn
 		super.downloadData(listener);
 	}
 	
-	@SuppressLint("NewApi")
 	private void fillList()
 	{
-		if (entity != null && listView != null)
+		if (entity != null && absListView != null)
 		{
-			hideProgressBar();			
-			listView.setAdapter(createAdapter(entity.getEntities()));
+			hideProgressBar();
+			
+			// these conditions prevend crash on Gingerbread devices
+			if (absListView instanceof GridView)
+			{
+				GridView gridView = (GridView) absListView;
+				gridView.setAdapter(createAdapter(entity.getEntities()));
+			}
+			else if (absListView instanceof ListView)
+			{
+				ListView listView = (ListView) this.absListView;
+				listView.setAdapter(createAdapter(entity.getEntities()));
+			}
 		}
 	}	
 	
@@ -137,12 +146,12 @@ public abstract class BaseListPageFragment<ET extends ApiEntity, T extends ApiEn
 	{
 		super.onViewCreated(view, savedInstanceState);
 		
-		this.listView = (AbsListView) rootView.findViewById(R.id.listView);
-		listView.setOnItemClickListener(this);
-		listView.setOnScrollListener(this);
-		if (listView instanceof ListView)
+		this.absListView = (AbsListView) rootView.findViewById(R.id.listView);
+		absListView.setOnItemClickListener(this);
+		absListView.setOnScrollListener(this);
+		if (absListView instanceof ListView)
 		{
-			((ListView) listView).setDivider(null);
+			((ListView) absListView).setDivider(null);
 			
 		}
 
@@ -172,7 +181,7 @@ public abstract class BaseListPageFragment<ET extends ApiEntity, T extends ApiEn
 	@Override
 	public void onDestroyView()
 	{
-		listView = null;
+		absListView = null;
 		super.onDestroyView();
 	}
 	
@@ -190,14 +199,14 @@ public abstract class BaseListPageFragment<ET extends ApiEntity, T extends ApiEn
 			public void onRequestComplete(ApiRequest apiRequest)
 			{
 				pendingRequest = null;
-				if (listView == null || entity == null) return;
+				if (absListView == null || entity == null) return;
 				try
 				{
 					T newEntity = createEntity(apiRequest.getResult());
 					int count = newEntity.getEntities().size();
 					hasMorePages = (count == itemsPerPage);
 					entity.merge(newEntity);
-					BaseEntityAdapter<ET> adapter = (BaseEntityAdapter<ET>) listView.getAdapter();
+					BaseEntityAdapter<ET> adapter = (BaseEntityAdapter<ET>) absListView.getAdapter();
 					adapter.notifyDataSetChanged();
 					page++;
 				} 

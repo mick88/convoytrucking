@@ -1,11 +1,11 @@
 package com.mick88.util;
 
-import com.mick88.util.ViewTraverser.ForeachAction;
-
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.view.View;
 import android.widget.TextView;
+
+import com.mick88.util.ViewTraverser.ForeachAction;
 
 /**
  * Applies selected font to the view and all views

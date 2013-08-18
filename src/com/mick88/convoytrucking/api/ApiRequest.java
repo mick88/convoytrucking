@@ -3,7 +3,6 @@ package com.mick88.convoytrucking.api;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Executor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +38,11 @@ public class ApiRequest
 	final Map<String, String> params;
 	private String result;
 	private BeforeFinishListener beforeFinishListener = null;
+	
+	public boolean isEmpty()
+	{
+		return TextUtils.isEmpty(result);
+	}
 	
 	public ApiRequest(ApiConnection apiConnection, Map<String,String> params)
 	{

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
 
     <TextView
@@ -22,7 +22,7 @@
         android:text="Staff"
         android:layout_below="@+id/tvPlayerName"
         android:textColor="@color/red"
-        android:visibility="visible" />
+        android:visibility="gone" />
     
      <TextView
         android:id="@+id/tvPlayerVip"
@@ -43,8 +43,6 @@
      	<TextView android:id="@+id/tvPlayerScore"
      		android:layout_width="wrap_content"
      		android:layout_height="wrap_content"
-     		android:layout_alignParentLeft="true"
-     		android:layout_below="@+id/tvPlayerVip"
      		android:text="Score: 1999"
      		android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -65,16 +63,13 @@
      	<TextView android:id="@+id/tvLastSeen"
      		android:layout_width="wrap_content"
      		android:layout_height="wrap_content"
-     		android:layout_alignParentLeft="true"
-     		android:layout_below="@+id/tvPlayerScore"
      		android:text="Last seen: 3 days ago"
      		android:textAppearance="?android:attr/textAppearanceMedium" />
      	<TextView android:id="@+id/tvRegistered"
      		android:layout_width="wrap_content"
      		android:layout_height="wrap_content"
-     		android:layout_alignParentLeft="true"
-     		android:layout_below="@+id/tvLastSeen"
      		android:text="Registered on:"
-     		android:textAppearance="?android:attr/textAppearanceMedium" />
+     		android:textAppearance="?android:attr/textAppearanceMedium" 
+     		android:maxLines="1"/>
      </LinearLayout>
 </RelativeLayout>

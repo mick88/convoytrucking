@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/card_background"
+    android:background="@drawable/card_selector"
     android:orientation="vertical"
     android:padding="@dimen/card_padding" >
 

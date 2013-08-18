@@ -15,7 +15,6 @@ import com.mick88.convoytrucking.ConvoyTruckingApp;
 import com.mick88.convoytrucking.R;
 import com.mick88.convoytrucking.api.ApiConnection;
 import com.mick88.convoytrucking.api.ApiRequest;
-import com.mick88.convoytrucking.base.BaseFragment;
 import com.mick88.convoytrucking.base.BasePageFragment;
 import com.mick88.convoytrucking.cards.DataCardFragment;
 import com.mick88.convoytrucking.twitter.Tweet;
@@ -115,14 +114,16 @@ public class ServerInfoPage extends BasePageFragment<ServerInfoEntity>
 			final ProgressBar tweetProgressBar = (ProgressBar) findViewById(R.id.progressTweets);
 			tweetProgressBar.setVisibility(View.VISIBLE);
 			new Twitter(ConvoyTruckingApp.TWITTER_FEED_URL).fetchFeedAsync(new OnTweetsFetchedListener()			
-			{
-				
+			{				
 				@Override
 				public void onTweetsFetched(ArrayList<Tweet> tweets)
 				{
-					ServerInfoPage.this.tweets = tweets;
-					listTwitter.setAdapter(new TweetAdapter(activity, tweets, fontApplicator));
-					tweetProgressBar.setVisibility(View.GONE);
+					if (tweets != null)
+					{
+						ServerInfoPage.this.tweets = tweets;
+						listTwitter.setAdapter(new TweetAdapter(activity, tweets, fontApplicator));
+						tweetProgressBar.setVisibility(View.GONE);
+					}
 				}
 			});
 		}

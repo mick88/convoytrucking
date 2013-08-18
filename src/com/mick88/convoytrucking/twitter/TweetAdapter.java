@@ -3,7 +3,6 @@ package com.mick88.convoytrucking.twitter;
 import java.util.List;
 
 import android.content.Context;
-import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;

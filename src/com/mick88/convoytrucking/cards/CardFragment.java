@@ -1,6 +1,5 @@
 package com.mick88.convoytrucking.cards;
 
-import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
