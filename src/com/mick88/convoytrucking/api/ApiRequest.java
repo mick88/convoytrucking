@@ -3,7 +3,6 @@ package com.mick88.convoytrucking.api;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Executor;
 
 import org.json.JSONArray;
 import org.json.JSONException;

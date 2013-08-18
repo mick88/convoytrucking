@@ -14,6 +14,7 @@
      <string name="title_houses">Houses</string>
      <string name="title_vehicles">Vehicles</string>
      <string name="title_server_info">Server info</string>
+     <string name="title_forum_posts">Forum posts</string>
      <string name="house_addr_placeholder">123 Imaginary Road</string>
      <string name="owned_by">Owned by:</string>
      <string name="location">Location</string>

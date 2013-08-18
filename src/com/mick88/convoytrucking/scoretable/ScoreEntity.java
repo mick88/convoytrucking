@@ -1,8 +1,5 @@
 package com.mick88.convoytrucking.scoretable;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 

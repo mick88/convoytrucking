@@ -10,9 +10,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 import com.mick88.convoytrucking.R;
 import com.mick88.convoytrucking.api.ApiConnection;
 import com.mick88.convoytrucking.api.ApiRequest;

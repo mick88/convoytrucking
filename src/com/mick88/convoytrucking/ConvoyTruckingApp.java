@@ -3,7 +3,8 @@ package com.mick88.convoytrucking;
 import android.app.Application;
 
 import com.mick88.convoytrucking.api.ApiConnection;
-import com.mick88.convoytrucking.base.BasePageFragment;
+import com.mick88.convoytrucking.base.BaseFragment;
+import com.mick88.convoytrucking.forum.ForumRssPage;
 import com.mick88.convoytrucking.houses.HouseListPage;
 import com.mick88.convoytrucking.navigation.AppMenuItem;
 import com.mick88.convoytrucking.scoretable.ScoretablePage;
@@ -66,7 +67,7 @@ public class ConvoyTruckingApp extends Application
 			new AppMenuItem(R.string.title_server_info, R.drawable.ic_nav_server_info){
 
 				@Override
-				public BasePageFragment<?> getPage()
+				public BaseFragment getPage()
 				{
 					return new ServerInfoPage();
 				}
@@ -76,7 +77,7 @@ public class ConvoyTruckingApp extends Application
 			{
 
 				@Override
-				public BasePageFragment<?> getPage()
+				public BaseFragment getPage()
 				{
 					return new ScoretablePage();
 				}
@@ -86,7 +87,7 @@ public class ConvoyTruckingApp extends Application
 			{
 
 				@Override
-				public BasePageFragment<?> getPage()
+				public BaseFragment getPage()
 				{
 					return new HouseListPage();
 				}
@@ -96,11 +97,20 @@ public class ConvoyTruckingApp extends Application
 			{
 
 				@Override
-				public BasePageFragment<?> getPage()
+				public BaseFragment getPage()
 				{
 					return new VehicleListPage();
 				}
 				
+			},
+			new AppMenuItem(R.string.title_forum_posts, R.drawable.ic_nav_rss)
+			{
+				
+				@Override
+				public BaseFragment getPage()
+				{
+					return new ForumRssPage();
+				}
 			},
 		};		
 		

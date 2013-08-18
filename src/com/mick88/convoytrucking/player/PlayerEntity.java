@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.mick88.convoytrucking.api.entities.ApiEntity;
-import com.mick88.convoytrucking.houses.HouseEntity;
 import com.mick88.convoytrucking.player.PlayerStat.StatType;
 import com.mick88.util.TimeConverter;
 

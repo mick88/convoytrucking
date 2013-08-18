@@ -3,12 +3,9 @@ package com.mick88.convoytrucking.base;
 import java.util.List;
 
 import org.json.JSONException;
-import org.jsoup.nodes.Entities;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;

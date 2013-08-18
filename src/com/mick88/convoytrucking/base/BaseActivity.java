@@ -1,8 +1,5 @@
 package com.mick88.convoytrucking.base;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -20,7 +17,6 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.mick88.convoytrucking.ConvoyTruckingApp;
 import com.mick88.convoytrucking.R;
-import com.mick88.convoytrucking.cards.CardFragment;
 import com.mick88.convoytrucking.cards.DownloadableDataCardFragment;
 import com.mick88.convoytrucking.interfaces.OnDownloadListener;
 import com.mick88.convoytrucking.interfaces.RefreshListener;
