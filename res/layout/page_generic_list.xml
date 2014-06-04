@@ -23,6 +23,8 @@
         android:numColumns="@integer/num_columns"
         android:verticalSpacing="@dimen/card_margin"
         android:visibility="visible"
+        android:padding="5dp"
+        android:clipToPadding="false"
         tools:listitem="@layout/card_house_small" />
 
 </LinearLayout>
